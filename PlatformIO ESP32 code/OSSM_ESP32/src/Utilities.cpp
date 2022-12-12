@@ -87,6 +87,16 @@ float calculateSensation(float sensationPercentage)
     return ((sensationPercentage * 200.0) / 100.0) - 100.0;
 }
 
+void OSSM::runTCode()
+{
+    OSSMTCode tcode(stepper, maxStrokeLengthMm);
+    for (;;)
+    {
+        tcode.loop();
+        vTaskDelay(10);
+    }
+}
+
 void OSSM::runStrokeEngine()
 {
     stepper.stopService();
@@ -200,7 +210,6 @@ void OSSM::runStrokeEngine()
             }
 
             Serial.println(Stroker.getPatternName(strokePattern));
-
             Stroker.setPattern(strokePattern, false); // Pattern, index must be < Stroker.getNumberOfPattern()
             g_ui.UpdateMessage(Stroker.getPatternName(strokePattern));
 
@@ -255,6 +264,11 @@ void OSSM::setRunMode()
             case strokeEngineMode:
                 g_ui.UpdateMessage("Stroke Engine");
                 activeRunMode = strokeEngineMode;
+                break;
+
+            case tCodeMode:
+                g_ui.UpdateMessage("T Code");
+                activeRunMode = tCodeMode;
                 break;
         }
     }

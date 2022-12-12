@@ -15,6 +15,7 @@
 #include "OSSM_PinDef.h"
 #include "OssmUi.h" // Separate file that helps contain the OLED screen functions
 #include "WiFi.h"
+#include "OSSMTCode.h"  
 #include "WiFiManager.h"
 
 #define BRIGHTNESS 170
@@ -39,8 +40,8 @@ class OSSM
     OssmUi g_ui;
     CRGB ossmleds[NUM_LEDS];
 
-    enum runMode {simpleMode, strokeEngineMode};
-    int runModeCount = 2;
+    enum runMode {simpleMode, strokeEngineMode, tCodeMode};
+    int runModeCount = 3;
 
     runMode activeRunMode = simpleMode;
     float maxSpeedMmPerSecond = hardcode_maxSpeedMmPerSecond;
@@ -85,6 +86,7 @@ class OSSM
 
     void runPenetrate(); //runs actual penetration motion one cycle
     void runStrokeEngine(); //runs stroke Engine
+    void runTCode(); //runs tcode
     String getPatternJSON(StrokeEngine Stroker);
     void setRunMode();
 
