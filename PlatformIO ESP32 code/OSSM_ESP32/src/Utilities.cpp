@@ -136,7 +136,7 @@ void OSSM::runStrokeEngine()
                 Stroker.startPattern();
             }
 
-            Stroker.setSpeed(speedPercentage * 3, true); // multiply by 3 to get to sane thrusts per minute speed
+            Stroker.setSpeed(speedPercentage * 2.5, true); // multiply by 3 to get to sane thrusts per minute speed
             lastSpeedPercentage = speedPercentage;
         }
 
